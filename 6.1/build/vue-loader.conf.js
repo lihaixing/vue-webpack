@@ -13,6 +13,7 @@ module.exports = {
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
+  // 转换成require方式
   transformToRequire: {
     video: ['src', 'poster'],
     source: 'src',

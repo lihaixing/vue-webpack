@@ -50,14 +50,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(), // 编译错误就跳过输出阶段，这样代码中就不会出现错误
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       inject: true
     }),
-    // copy custom static assets
+    // copy custom static assets 直接复制该目录到dist
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
@@ -69,6 +69,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 })
 
 module.exports = new Promise((resolve, reject) => {
+  // portfinder 帮助检查端口是否被占用，如果被占用就返回一个新的端口
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {
     if (err) {

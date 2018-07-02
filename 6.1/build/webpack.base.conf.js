@@ -20,6 +20,7 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
+  // 告诉整个运行环境的上下文
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
@@ -34,6 +35,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      // 加$表示已经具体到文件
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
     }
@@ -80,6 +82,7 @@ module.exports = {
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
+    // 防止node api的实现注入到代码中
     setImmediate: false,
     // prevent webpack from injecting mocks to Node native modules
     // that does not make sense for the client
